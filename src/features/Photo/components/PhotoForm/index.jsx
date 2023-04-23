@@ -1,7 +1,7 @@
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, FormGroup } from 'reactstrap';
+import { Button, FormGroup, Spinner } from 'reactstrap';
 import { Formik, Form, FastField } from 'formik';
 import * as Yup from 'yup';
 
@@ -31,12 +31,10 @@ function PhotoForm(props) {
     });
 
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={(values) => console.log(values)}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={props.onSubmit}>
             {(formikProps) => {
+                const { isSubmitting } = formikProps;
+
                 return (
                     <Form>
                         <FastField name="title" component={InputField} label="Title" placeholder="Eg: Wow nature..." />
@@ -52,6 +50,7 @@ function PhotoForm(props) {
 
                         <FormGroup>
                             <Button type="submit" color="primary">
+                                {isSubmitting && <Spinner size="sm" />}
                                 Add to album
                             </Button>
                         </FormGroup>
