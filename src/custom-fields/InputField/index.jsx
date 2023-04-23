@@ -23,7 +23,7 @@ InputField.defaultProps = {
 function InputField(props) {
     console.log(props);
     // eslint - disable - next - line;
-    const { field, form, type, label, placeholder, disable } = props;
+    const { field, form, type, label, placeholder, disabled } = props;
     const { name } = field;
     const { errors, touched } = form;
     const showError = errors[name] && touched[name];
@@ -31,7 +31,7 @@ function InputField(props) {
     return (
         <FormGroup>
             {label && <Label for={name}>{label}</Label>}
-            <Input id={name} {...field} invalid={showError} placeholder={placeholder} type={type} />
+            <Input id={name} {...field} disabled={disabled} invalid={showError} placeholder={placeholder} type={type} />
             <ErrorMessage name={name} component={FormFeedback} />
         </FormGroup>
     );
