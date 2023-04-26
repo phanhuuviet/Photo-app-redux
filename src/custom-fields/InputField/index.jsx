@@ -21,7 +21,6 @@ InputField.defaultProps = {
 };
 
 function InputField(props) {
-    console.log(props);
     // eslint - disable - next - line;
     const { field, form, type, label, placeholder, disabled } = props;
     const { name } = field;

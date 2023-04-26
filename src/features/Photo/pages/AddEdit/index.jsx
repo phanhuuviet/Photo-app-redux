@@ -36,7 +36,6 @@ function AddEditPage(props) {
                     dispatch(action);
                 } else {
                     const action = updatePhoto(values);
-                    console.log(action);
                     dispatch(action);
                 }
                 history.push('/photos');

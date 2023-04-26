@@ -13,7 +13,6 @@ function MainPage(props) {
     const dispatch = useDispatch();
     const photos = useSelector((state) => state.photos);
     const history = useHistory();
-    console.log('list of photos: ', photos);
 
     const handlePhotoEditClick = (photo) => {
         history.push(`/photos/${photo.id}`);
