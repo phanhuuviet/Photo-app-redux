@@ -83,7 +83,6 @@ const photo = createSlice({
             state.push(action.payload);
         },
         removePhoto: (state, action) => {
-          console.log(action.payload);
           const removePhotoId = action.payload;
           return state.filter((photo) => photo.id !== removePhotoId);
         },
