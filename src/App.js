@@ -9,6 +9,9 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useEffect } from 'react';
 import productApi from 'api/productApi';
+import { useDispatch } from 'react-redux';
+import { getMe } from 'app/userSlice';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 // Lazy load - Code splitting
 const Photo = React.lazy(() => import('./features/Photo'));
@@ -24,6 +27,7 @@ function App() {
   
   // eslint-disable-next-line no-unused-vars
   const [ productList ,setProductList ] = useState([]);
+  const dispatch = useDispatch();
 
   // Product List
   useEffect(() => {
@@ -51,11 +55,15 @@ function App() {
         console.log('User is not logged in');
         return;
       }
+      const actionResult = await dispatch(getMe());
+      const currentUser = unwrapResult(actionResult);
+      console.log(currentUser);
+
       localStorage.setItem('firebaseui::rememberedAccounts', JSON.stringify(user.providerData))
     });
 
     return () => unregisterAuthObserver();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="photo-app">
